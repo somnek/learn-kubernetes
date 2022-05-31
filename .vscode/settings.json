@@ -1,0 +1,18 @@
+{
+  "editor.fontFamily": "'Fira Code', 'Droid Sans Mono', 'monospace', monospace",
+  "editor.tokenColorCustomizations": {
+      "textMateRules": [
+        {
+          "name": "markup.inline.raw.string.markdown",
+          "scope": [
+            "markup.inline.raw.string.markdown",
+          ],
+          "settings": {
+            "fontStyle": "bold",
+            "foreground": "#2184bd",
+          }
+        },
+      ],
+  },
+}
+
