@@ -19,3 +19,7 @@ and the `kube-apiserver` simply routes requests to *registered* controllers/prov
 - where all the data get stored (high performance `key-value` store, like redis)
 - if this thing get fucked, in big trouble, it is always a good idea to do backup 
   as mentioned in doc, biggest case of db backup in history
+
+
+# default namespace:
+- `kube-system`

@@ -29,10 +29,12 @@
 * gotta learn separately
 
 ## kube-scheduler
+* *THE* brain the maps the `nodes`
+* not only a *cron-job*, its also a match maker, finds the best place
 * control plane component: that watches for newly creatd `Pods` (those that aren't assigned yet) and assign them to nodes to run on.
 
 ## kube-controller-manager
-* control plane component: event loop that watch things, it runs `controller` process.
+* event loop that watch everything, it runs `controller` process.
 * each `controller` is separate process
 * types of `controller`:
 	- `Node controller`: 

@@ -1,6 +1,21 @@
+# stop
+`minikube stop`
+
+# ssh inside pod
+`mk ssh`
+
+# check resource of control plane components
+`k get all -n ${kube-system}`
+
+# show all pods
+`kubectl get pods -A`
+
 # rollout
 * restart the whole thing (all pods get resets)
 `kubectl rollout restart deploy foo`
+
+# delete node (non-default nodes i.e not name == `minikube`)
+`minikube delete -p ${foo}`
 
 # delete pods
 * note that self healing will occur (take times), regardless of how many pods is up
@@ -13,15 +28,31 @@
 * intant (don't have to pass the whole pod name)
 `kubectl delete deployments.apps foo`
 
+# delete (multi)
+* pods in single namespace
+	kubectl delete --all pods --namespace=foo
+* deployments (delete all pods attached with the deployments in namespace)
+	kubectl delete --all deployments --namespace=foo
+* all with namespaces
+	kubectl delete --all namespaces
+
 # kubectl new pods pods (fast way to spin up a pod)
 * by providing any command `-- ` (e.g `sleep`), prevent crash backloop
-`kubectl create deploy foo --image ubuntu -- sleep 100`
+`kubectl create deploy foo --image=ubuntu -- ${infinite command here}`
+	or
+* example of infinite command
+-- sleep 100
+-- tail -f /dev/null
 
 # list all pods
-`kubectl get pods`
+`kubectl get pods A` / `kubectl get po -A`
 
 # start minikube choose driver, (docker by default)
-`minikube start --driver=virtualbox`
+* without passing -p flag, it creates node with name `minikube`, 
+  which when do `minikube delete` will be deleted automatically
+* while nodes that created with -p flag can be deleted with `minikube delete -p ${foo}`
+`minikube start --driver=virtualbox -p foo`
+
 
 #  to set default driver:
 `minikube config set driver virtualbox`
@@ -39,4 +70,8 @@
 # minikube vs kubectl
 * `kubectl` used to access the kubernetes cluster `control plane` inside `minikube`
 * also `minikube` comes with `kubectl`
+
+* if pods with name followed by random alphanum, it is deployment
+	e.g. coredns-74ffldkjl-iimxz
+
 
