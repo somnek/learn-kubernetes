@@ -1,3 +1,29 @@
+
+
+# get secret
+`kubectl` get secret {release-name} -o yaml | awk -F ': ' '/password/{print $2}' | base64 -d; echo`
+
+# watch
+`kubectl get pods -w`
+
+# port forwarding
+`kubectl port-forward --namespace {namespace} svc/{service} 5055:80` # 5055 is the local port, 80 is the remote port
+# expose service (copilot wrote this)
+`kubectl expose --namespace {namespace} svc/{service} --type=NodePort`
+# logs pog
+`kubectl logs -n {foo-namespace} {pod-name}`
+
+# describe pod
+`kubectl describe pod -n rasa-namespace foo`
+
+# get namespaces / service 
+* can pass `--all` to show all
+`kubectl get namespace`
+`kubectl get service`
+
+# create namespace
+`kubectl create namespace foo`
+
 # stop
 `minikube stop`
 
@@ -53,6 +79,8 @@
 * while nodes that created with -p flag can be deleted with `minikube delete -p ${foo}`
 `minikube start --driver=virtualbox -p foo`
 
+# start multiple node:
+`minikube start --driver=virtualbox --nodes 2 -p foo`
 
 #  to set default driver:
 `minikube config set driver virtualbox`
@@ -64,14 +92,53 @@
 * it removes all assiciated files/vm
 `minikube delete`
 
+# get cluster infos
+`kubectl cluster-info --context kind-single`
+
+# get services
+`kubectl get services`
+
+# inspect to yaml
+`kubectl get po -n {namespace} -o yaml > test.md`
+
+
+
+## helm
+-----------------
+* list all releases
+`helm list -A`
+
+* list repos
+`helm repo list`
+
+## kind
+-----------------
+- stands for Kubernetes-in-Docker
+
+* create (name & config is optional)
+`kind create cluster --name {foo} --config {test.yaml}`
+
+* delete cluster
+`kind delete cluster --name {foo}`
+
+* get all cluster
+`kind get clusters`
+
+
+
+
+
+
 
 ## Commands Notes
 ------------------
 # minikube vs kubectl
-* `kubectl` used to access the kubernetes cluster `control plane` inside `minikube`
+* `kubectl`: interaction with K through `API`
+* access the kubernetes cluster `control plane` inside `minikube`
 * also `minikube` comes with `kubectl`
 
 * if pods with name followed by random alphanum, it is deployment
 	e.g. coredns-74ffldkjl-iimxz
+
 
 
